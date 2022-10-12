@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button class="btn-usr">get users</button>
+<script>
+    document.querySelector('.btn-usr').addEventListener('click', function () {
+        let users = {};
+       fetch('/user')
+           .then((response) => response.json())
+           .then((data) => users = data);
+        console.log(users);
+    });
+</script>
+</body>
+</html>
