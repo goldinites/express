@@ -6,13 +6,47 @@
 </head>
 <body>
 <button class="btn-usr">get users</button>
+<div class="form">
+    <input type="text" name="name">
+    <input type="text" name="age">
+    <button class="btn-usr-add">add user</button>
+</div>
+<div class="form">
+    <input type="text" name="name-delete">
+    <button class="btn-usr-delete">remove user</button>
+</div>
 <script>
     document.querySelector('.btn-usr').addEventListener('click', function () {
-        let users = {};
        fetch('/user')
            .then((response) => response.json())
-           .then((data) => users = data);
-        console.log(users);
+           .then((data) => console.log(data));
+    });
+
+    document.querySelector('.btn-usr-add').addEventListener('click', function() {
+        let data = {
+            firstname : document.querySelector('[name="name"]').value,
+            age : document.querySelector('[name="age"]').value,
+        }
+       fetch('/user', {
+           method: 'POST',
+           headers: {
+               'Content-Type': 'application/json'
+           },
+           body: JSON.stringify(data)
+       });
+    });
+
+    document.querySelector('.btn-usr-delete').addEventListener('click', function() {
+        let data = {
+            firstname:  document.querySelector('[name="name-delete"]').value,
+        }
+        fetch('/user', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }).then(response => response.json()).then((data) => console.log(data));
     });
 </script>
 </body>

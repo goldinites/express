@@ -1,10 +1,15 @@
 import express from "express";
 import database from "./database/index.js";
 import router from "./routes/index.js";
+import bodyParser from "body-parser";
 import fs from "fs";
 
 const app = express();
 const port = 80;
+
+app.use(bodyParser.urlencoded({extended: false}));
+
+app.use(bodyParser.json());
 
 app.use(router);
 
